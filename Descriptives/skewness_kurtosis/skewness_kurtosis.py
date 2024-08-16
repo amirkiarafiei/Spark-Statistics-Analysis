@@ -19,7 +19,7 @@ start_time = time.time()
 column_names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "class"]
 
 # Read the CSV file without inferring the schema and provide column names
-iris_data = spark.read.csv("iris.csv", header=False, inferSchema=True).toDF(*column_names)
+iris_data = spark.read.csv("../../iris100Kx.csv", header=False, inferSchema=True).toDF(*column_names)
 
 # Calculate skewness and kurtosis for each column
 skewness_values = iris_data.select([skewness(col(c)).alias(c) for c in iris_data.columns])

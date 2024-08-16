@@ -4,7 +4,9 @@ from pyspark.sql.types import StructType, StructField, FloatType, StringType
 from scipy.stats import ttest_ind
 import time
 
-
+# Set the PYSPARK_PYTHON environment variable
+import os
+os.environ["PYSPARK_PYTHON"] = "C:\\Users\\HP\\anaconda3\\envs\\BigDataProject\\python.exe"
 
 # Create a Spark session
 spark = SparkSession.builder.appName("TTestExample") \

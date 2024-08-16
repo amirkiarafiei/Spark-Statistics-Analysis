@@ -30,7 +30,7 @@ iris_data = spark.read \
     .format("csv") \
     .option("header", "false") \
     .schema(schema) \
-    .load("iris10Kx.csv")  # Replace with the actual path to your Iris dataset
+    .load("../../iris100Kx.csv")  # Replace with the actual path to your Iris dataset
 
 # Prepare the data for linear regression
 feature_columns = ["sepal_width", "petal_length", "petal_width"]

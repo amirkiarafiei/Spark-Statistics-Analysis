@@ -25,7 +25,7 @@ iris_schema = StructType([
 ])
 
 # Load the Iris dataset with the specified schema
-iris_df = spark.read.csv("iris.csv", header=False, inferSchema=True, schema=iris_schema)
+iris_df = spark.read.csv("../../iris100Kx.csv", header=False, inferSchema=True, schema=iris_schema)
 
 # Assuming the class column is the fifth column (index 4)
 class_index = 4

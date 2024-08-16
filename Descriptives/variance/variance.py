@@ -24,7 +24,7 @@ iris_schema = StructType([
 ])
 
 # Load the Iris dataset with the specified schema
-iris_df = spark.read.csv("iris10Kx.csv", header=False, schema=iris_schema)
+iris_df = spark.read.csv("../../iris100Kx.csv", header=False, schema=iris_schema)
 
 # Calculate the mean for each column
 mean_df = iris_df.agg(

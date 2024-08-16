@@ -8,7 +8,7 @@ import time
 
 # Create a Spark session
 spark = SparkSession.builder.appName("ChiSquareTestExample") \
-    .master("local[2]") \
+    .master("local[3]") \
     .config("spark.executor.memory", "2g") \
     .config("spark.executor.memoryOverhead", "1g") \
     .getOrCreate()
@@ -26,7 +26,7 @@ iris_schema = StructType([
 ])
 
 # Load the Iris dataset with the specified schema
-iris_data = spark.read.csv("iris.csv", header=False, schema=iris_schema)
+iris_data = spark.read.csv("../../iris100Kx.csv", header=False, schema=iris_schema)
 
 # Convert species labels to numerical indices
 class_indexer = StringIndexer(inputCol="species", outputCol="label")

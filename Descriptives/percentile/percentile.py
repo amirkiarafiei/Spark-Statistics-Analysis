@@ -1,11 +1,11 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, DoubleType
-from pyspark.sql.functions import col
+from pyspark.sql.functions import col, percentile_approx
 import time
 
 # Create a Spark session
 spark = SparkSession.builder.appName("PercentileCalculator") \
-        .master("local[3]") \
+        .master("local[1]") \
         .config("spark.executor.memory", "2g") \
         .config("spark.executor.memoryOverhead", "1g") \
         .getOrCreate()
@@ -22,18 +22,15 @@ iris_schema = StructType([
 ])
 
 # Load the Iris dataset with the specified schema
-iris_df = spark.read.csv("iris10Kx.csv", header=False, inferSchema=True, schema=iris_schema)
+iris_df = spark.read.csv("../../iris10Kx.csv", header=False, inferSchema=True, schema=iris_schema)
 
 # Define the desired percentile
 percentile = 25  # Change this to the desired percentile
 
 # Iterate over all four columns
 for col_name in iris_df.columns:
-    # Calculate the desired percentile using Spark SQL's percentile_approx function
-    result = iris_df.stat.approxQuantile(col_name, [percentile / 100.0], 0.0)
-
-    # Display the percentile value for the current column
-    print(f"{percentile}th Percentile for column {col_name}: {result[0]}")
+    percentile_value = iris_df.select(percentile_approx(col_name, percentile/100)).collect()[0][0]
+    print(f"{percentile}th Percentile for column {col_name}: {percentile_value}")
 
 # Calculate elapsed time
 end_time = time.time()

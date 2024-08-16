@@ -23,14 +23,14 @@ iris_schema = StructType([
 ])
 
 # Load the Iris dataset with the specified schema
-iris_df = spark.read.csv("iris10Kx.csv", header=False, inferSchema=True, schema=iris_schema)
+iris_df = spark.read.csv("../../iris100Kx.csv", header=False, inferSchema=True, schema=iris_schema)
 
 # Calculate the median for each column
 medians_df = iris_df.agg(
-    F.expr("percentile_approx(sepal_length, 0.5)").alias("median_sepal_length"),
-    F.expr("percentile_approx(sepal_width, 0.5)").alias("median_sepal_width"),
-    F.expr("percentile_approx(petal_length, 0.5)").alias("median_petal_length"),
-    F.expr("percentile_approx(petal_width, 0.5)").alias("median_petal_width")
+    F.percentile_approx("sepal_length", 0.5).alias("median_sepal_length"),
+    F.percentile_approx("sepal_width", 0.5).alias("median_sepal_width"),
+    F.percentile_approx("petal_length", 0.5).alias("median_petal_length"),
+    F.percentile_approx("petal_width", 0.5).alias("median_petal_width")
 )
 
 # Display the results

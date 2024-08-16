@@ -8,7 +8,7 @@ import time
 
 # Create a Spark session
 spark = SparkSession.builder.appName("CorrelationCalculator") \
-    .master("local[3]") \
+    .master("local[]") \
     .config("spark.executor.memory", "2g") \
     .config("spark.executor.memoryOverhead", "1g") \
     .getOrCreate()
@@ -25,7 +25,7 @@ iris_schema = StructType([
 ])
 
 # Load the Iris dataset with the specified schema
-iris_data = spark.read.csv("iris.csv", header=False, schema=iris_schema)
+iris_data = spark.read.csv("../../iris100Kx.csv", header=False, schema=iris_schema)
 
 # Select relevant columns (sepal length, sepal width, petal length, petal width)
 selected_columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
