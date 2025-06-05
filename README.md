@@ -1,4 +1,6 @@
 # Statistics Analysis using Spark on Iris Dataset
+Sample codes used in the paper:
+[On the Use of Data Parallelism Technologies for Implementing Statistical Analysis Functions](https://www.wcse.org/WCSE_2024/015.pdf), presented in the [2024 The 14th International Workshop on Computer Science and Engineering (WCSE 2024)](https://www.wcse.us/2024.html)
 
 ## Overview
 
